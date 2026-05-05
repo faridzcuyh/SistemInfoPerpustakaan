@@ -1,0 +1,78 @@
+/* ===== ONLY CUSTOM STYLES (Bootstrap can't do these) ===== */
+
+/* Apply Ubuntu font globally */
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* Hero section with background image */
+.hero-section {
+    min-height: 50vh;
+    background: url('libraryBackground.jpg') center / cover no-repeat;
+}
+
+/* Dark overlay on hero */
+.hero-overlay {
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.7) 0%, rgba(52, 152, 219, 0.5) 100%);
+}
+
+/* Fade-in animation for hero text */
+.animate-fade {
+    animation: fadeInDown 1s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Letter spacing utility (not in Bootstrap) */
+.tracking-wide {
+    letter-spacing: 3px;
+}
+
+/* Make carousel fill its column height */
+.carousel-custom {
+    height: 100%;
+}
+
+.carousel-custom .carousel-inner {
+    min-height: 100%;
+}
+
+/* Carousel control hover effect */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    transition: all 0.3s ease;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: #f39c12 !important;
+    transform: scale(1.1);
+}
+
+/* Responsive hero height */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 35vh;
+    }
+    .animate-fade {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: 30vh;
+    }
+    .animate-fade {
+        font-size: 1.8rem !important;
+    }
+}
