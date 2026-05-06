@@ -21,6 +21,22 @@ body {
     animation: fadeInDown 1s ease-out;
 }
 
+/* Navbar inactive link hover & active state */
+.nav-inactive {
+    transition: all 0.3s ease;
+}
+
+.nav-inactive:hover,
+.nav-inactive:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff !important;
+}
+
+/* Active navbar item indicator */
+.navbar-nav .nav-link.active:not(.btn-warning) {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
 @keyframes fadeInDown {
     from {
         opacity: 0;
