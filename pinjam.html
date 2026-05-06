@@ -64,24 +64,24 @@
                 <div class="col-lg-8">
                     <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
                         <h4 class="fw-bold mb-4">Formulir Peminjaman</h4>
-                        <form>
+                        <form id="pinjamForm">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Nama Lengkap</label>
-                                    <input type="text" class="form-control" placeholder="Masukkan nama lengkap">
+                                    <input type="text" id="nama" class="form-control" placeholder="Masukkan nama lengkap" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Nomor Anggota</label>
-                                    <input type="text" class="form-control" placeholder="Masukkan nomor anggota">
+                                    <input type="text" id="nomorAnggota" class="form-control" placeholder="Masukkan nomor anggota" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Judul Buku</label>
-                                    <input type="text" class="form-control" placeholder="Masukkan judul buku">
+                                    <input type="text" id="judulBuku" class="form-control" placeholder="Masukkan judul buku" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Kategori</label>
-                                    <select class="form-select">
-                                        <option selected>Pilih kategori</option>
+                                    <select id="kategori" class="form-select" required>
+                                        <option value="">Pilih kategori</option>
                                         <option>Komik</option>
                                         <option>Novel</option>
                                         <option>Ensiklopedia</option>
@@ -90,15 +90,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Tanggal Pinjam</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" id="tglPinjam" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Tanggal Kembali</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" id="tglKembali" class="form-control" required>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Catatan</label>
-                                    <textarea class="form-control" rows="3" placeholder="Tambahkan catatan (opsional)"></textarea>
+                                    <textarea id="catatan" class="form-control" rows="3" placeholder="Tambahkan catatan (opsional)"></textarea>
                                 </div>
                                 <div class="col-12 mt-4">
                                     <button type="submit" class="btn btn-primary btn-lg fw-semibold w-100 rounded-pill">Ajukan Peminjaman</button>
@@ -111,7 +111,133 @@
         </div>
     </section>
 
+    <!-- Daftar Peminjaman -->
+    <section class="bg-white py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="fw-bold mb-0">📋 Data Peminjaman</h4>
+                            <button id="hapusSemuaBtn" class="btn btn-outline-danger rounded-pill btn-sm px-3">Hapus Semua</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>No. Anggota</th>
+                                        <th>Judul Buku</th>
+                                        <th>Kategori</th>
+                                        <th>Tgl Pinjam</th>
+                                        <th>Tgl Kembali</th>
+                                        <th>Catatan</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dataTableBody">
+                                    <!-- Data will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p id="emptyMessage" class="text-center text-secondary mt-4 mb-0">Belum ada data peminjaman.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load data from localStorage
+        function getPeminjaman() {
+            return JSON.parse(localStorage.getItem('peminjaman')) || [];
+        }
+
+        // Save data to localStorage
+        function savePeminjaman(data) {
+            localStorage.setItem('peminjaman', JSON.stringify(data));
+        }
+
+        // Render table
+        function renderTable() {
+            const data = getPeminjaman();
+            const tbody = document.getElementById('dataTableBody');
+            const emptyMsg = document.getElementById('emptyMessage');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '';
+                emptyMsg.style.display = '';
+                return;
+            }
+            emptyMsg.style.display = 'none';
+
+            tbody.innerHTML = data.map((item, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.nama}</td>
+                    <td>${item.nomorAnggota}</td>
+                    <td>${item.judulBuku}</td>
+                    <td><span class="badge bg-secondary">${item.kategori}</span></td>
+                    <td>${item.tglPinjam}</td>
+                    <td>${item.tglKembali}</td>
+                    <td>${item.catatan || '-'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger rounded-pill hapus-btn" data-index="${index}">Hapus</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            // Attach hapus event
+            document.querySelectorAll('.hapus-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const data = getPeminjaman();
+                    const idx = parseInt(this.getAttribute('data-index'));
+                    data.splice(idx, 1);
+                    savePeminjaman(data);
+                    renderTable();
+                });
+            });
+        }
+
+        // Handle form submit
+        document.getElementById('pinjamForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const peminjaman = {
+                nama: document.getElementById('nama').value.trim(),
+                nomorAnggota: document.getElementById('nomorAnggota').value.trim(),
+                judulBuku: document.getElementById('judulBuku').value.trim(),
+                kategori: document.getElementById('kategori').value,
+                tglPinjam: document.getElementById('tglPinjam').value,
+                tglKembali: document.getElementById('tglKembali').value,
+                catatan: document.getElementById('catatan').value.trim()
+            };
+
+            const data = getPeminjaman();
+            data.push(peminjaman);
+            savePeminjaman(data);
+            renderTable();
+
+            // Reset form
+            this.reset();
+
+            // Alert sukses
+            alert('✅ Peminjaman berhasil diajukan!');
+        });
+
+        // Hapus semua
+        document.getElementById('hapusSemuaBtn').addEventListener('click', function() {
+            if (confirm('Hapus semua data peminjaman?')) {
+                savePeminjaman([]);
+                renderTable();
+            }
+        });
+
+        // Render on load
+        document.addEventListener('DOMContentLoaded', renderTable);
+    </script>
 </body>
 
 </html>
