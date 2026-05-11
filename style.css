@@ -80,9 +80,14 @@ body {
     left: 0;
 }
 
-/* Set fixed heights for each carousel */
+/* Left carousel fills column height (matching 2 right carousels combined) */
+#carouselKiri {
+    min-height: 360px;
+}
+
 #carouselKiri .carousel-inner {
-    height: 500px;
+    height: 100%;
+    min-height: 100%;
 }
 
 /* Right carousels: auto height so images show fully without cropping */
