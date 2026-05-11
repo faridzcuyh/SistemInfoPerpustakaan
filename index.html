@@ -109,5 +109,35 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const session = getCurrentUser();
+        if (session && session.username) {
+          const loginItem = document.getElementById('navLoginItem');
+          const registerItem = document.getElementById('navRegisterItem');
+          if (loginItem) loginItem.remove();
+          if (registerItem) registerItem.remove();
+
+          const ul = document.querySelector('.navbar-nav');
+          if (ul) {
+            const li = document.createElement('li');
+            li.className = 'nav-item';
+            li.innerHTML = '<span class="nav-link text-white fw-semibold px-3 rounded-pill d-flex align-items-center gap-2" style="cursor: default;"><span class="text-warning" style="font-weight: 700;">Hi, ' + session.username + '</span></span>';
+            ul.appendChild(li);
+
+            const li2 = document.createElement('li');
+            li2.className = 'nav-item';
+            li2.innerHTML = '<button id="logoutBtn" class="nav-link btn btn-outline-light text-white fw-semibold px-3 rounded-pill" type="button">Logout</button>';
+            ul.appendChild(li2);
+
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+              logout();
+              window.location.href = 'login.html';
+            });
+          }
+        }
+      });
+    </script>
   </body>
 </html>
