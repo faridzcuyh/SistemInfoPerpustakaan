@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <title>Admin - Kelola Buku - LibraTech</title>
+</head>
+
+<body class="bg-light">
+
+    <!-- Header -->
+    <div class="bg-primary bg-gradient text-white text-center py-4 border-bottom border-warning border-4 shadow-sm">
+        <div class="container">
+            <h1 class="fw-bold display-5 mb-0 text-uppercase tracking-wide">LibraTech - Admin Buku</h1>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="index.html" class="navbar-brand p-0">
+                <img src="logo.ico" alt="Logo" style="max-width: 45px; filter: brightness(0) invert(1);">
+            </a>
+            <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link active btn btn-warning text-dark fw-semibold px-3 rounded-pill"
+                            aria-current="page" href="admin-buku.html">Kelola Buku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fw-semibold px-3 rounded-pill nav-inactive" href="admin-pinjam.html">Pinjam</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Judul -->
+    <section class="bg-white py-4 border-bottom">
+        <div class="container">
+            <h2 class="fw-bold text-dark mb-0">📚 Kelola Koleksi Buku</h2>
+            <p class="text-secondary mt-2 mb-0">Tambah, edit, atau hapus buku dari perpustakaan</p>
+        </div>
+    </section>
+
+    <!-- Form Tambah Buku -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <h4 class="fw-bold mb-4" id="formTitle">➕ Tambah Buku Baru</h4>
+                        <form id="bookForm">
+                            <input type="hidden" id="editIndex" value="">
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Kategori</label>
+                                <select id="kategori" class="form-select" required>
+                                    <option value="komik">Komik Aksi & Petualangan</option>
+                                    <option value="novel">Novel</option>
+                                    <option value="ensiklopedia">Ensiklopedia</option>
+                                    <option value="sejarah">Ilmu Sosial</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Judul Buku</label>
+                                <input type="text" id="judul" class="form-control" placeholder="Masukkan judul buku" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Penulis</label>
+                                <input type="text" id="penulis" class="form-control" placeholder="Nama penulis" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Status</label>
+                                <select id="status" class="form-select">
+                                    <option value="Tersedia">Tersedia</option>
+                                    <option value="Dipinjam">Dipinjam</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Label / Badge</label>
+                                <select id="badge" class="form-select">
+                                    <option value="Fiksi">Fiksi</option>
+                                    <option value="Non-Fiksi">Non-Fiksi</option>
+                                    <option value="Ilmu Sosial">Ilmu Sosial</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Upload Gambar Sampul</label>
+                                <input type="file" id="gambarFile" class="form-control" accept="image/*">
+                                <div class="form-text">Upload gambar sampul buku (format: JPG, PNG, AVIF, WEBP)</div>
+                                <div id="gambarPreview" class="mt-2 text-center" style="display: none;">
+                                    <img id="previewImg" src="" alt="Preview" style="max-height: 150px; object-fit: contain; border-radius: 8px; border: 1px solid #ddd;">
+                                    <button type="button" id="hapusGambarBtn" class="btn btn-sm btn-outline-danger mt-1 rounded-pill">Hapus Gambar</button>
+                                </div>
+                                <input type="hidden" id="gambar" value="">
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary fw-semibold rounded-pill px-4" id="submitBtn">Tambah Buku</button>
+                                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" id="cancelBtn" style="display: none;">Batal</button>
+                            </div>
+
+                            <div id="formMsg" class="mt-3" aria-live="polite"></div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Daftar Buku -->
+                <div class="col-lg-7 mt-4 mt-lg-0">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="fw-bold mb-0">📖 Daftar Buku</h4>
+                            <div class="d-flex gap-2">
+                                <select id="filterKategori" class="form-select form-select-sm" style="width: auto;">
+                                    <option value="semua">Semua Kategori</option>
+                                    <option value="komik">Komik</option>
+                                    <option value="novel">Novel</option>
+                                    <option value="ensiklopedia">Ensiklopedia</option>
+                                    <option value="sejarah">Ilmu Sosial</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kategori</th>
+                                        <th>Judul</th>
+                                        <th>Penulis</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookTableBody">
+                                    <!-- Data will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p id="emptyBookMsg" class="text-center text-secondary mt-4 mb-0">Belum ada buku.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Proteksi halaman: hanya untuk admin
+        document.addEventListener('DOMContentLoaded', () => {
+            requireAuth({ loginUrl: 'login.html' });
+
+            const session = getCurrentUser();
+            const isAdmin = !!(session && (session.role === 'admin' || session.username === 'admin'));
+
+            if (!isAdmin) {
+                window.location.href = 'buku.html';
+                return;
+            }
+
+            window.__currentUsername = session && session.username ? session.username : null;
+
+            const nav = document.querySelector('nav');
+            if (nav && session && session.username) {
+                const ul = nav.querySelector('ul.navbar-nav');
+                if (ul && !ul.querySelector('#logoutBtn')) {
+                    const li = document.createElement('li');
+                    li.className = 'nav-item';
+                    li.innerHTML = `
+                        <span class="nav-link text-white fw-semibold px-3 rounded-pill d-flex align-items-center gap-2" style="cursor: default;">
+                            <span class="text-warning" style="font-weight: 700;">Hi, ${session.username}</span>
+                        </span>
+                    `;
+                    ul.appendChild(li);
+
+                    const li2 = document.createElement('li');
+                    li2.className = 'nav-item';
+                    li2.innerHTML = `
+                        <button id="logoutBtn" class="nav-link btn btn-outline-light text-white fw-semibold px-3 rounded-pill" type="button">Logout</button>
+                    `;
+                    ul.appendChild(li2);
+
+                    document.getElementById('logoutBtn').addEventListener('click', () => {
+                        logout();
+                        window.location.href = 'login.html';
+                    });
+                }
+            }
+
+            // Inisialisasi data buku default jika belum ada
+            initBooks();
+            renderBookTable();
+        });
+
+        // ===== DATA BUKU DEFAULT =====
+        const DEFAULT_BOOKS = [
+            { kategori: 'komik', judul: 'Akasha : Chiruran Shinsengumi 13', penulis: 'Eiji Hashimoto / Shinya Umemura', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/chiruran.avif' },
+            { kategori: 'komik', judul: 'Solo Leveling 17', penulis: 'Dubu/Chugong', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/sololeveling.avif' },
+            { kategori: 'komik', judul: 'Level Comic: Jojo`s Bizarre Adventure 18 - Part 3 Stardust Crusaders', penulis: 'Hirohiko Araki', status: 'Dipinjam', badge: 'Fiksi', gambar: 'buku/jojo.avif' },
+            { kategori: 'komik', judul: 'Naruto Bind Up Edition 26', penulis: 'MASASHI KISHIMOTO', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/naruto.avif' },
+            { kategori: 'komik', judul: 'Level Comic: Dandadan 12', penulis: 'Tatsu Yukinobu', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/dandadan.avif' },
+            { kategori: 'komik', judul: 'One Piece 110', penulis: 'Eiichiro Oda', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/onepiece.avif' },
+            { kategori: 'komik', judul: 'Mashle 15', penulis: 'Hajime Komoto', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/masle.avif' },
+            { kategori: 'komik', judul: "Akasha : Neon Genesis Evangelion - Collector's Edition 03", penulis: 'Yoshiyuki Sadamoto/khara/ Gainax', status: 'Dipinjam', badge: 'Fiksi', gambar: 'buku/evangelion.avif' },
+            { kategori: 'novel', judul: 'The Big Four', penulis: 'Agatha Christie', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/bigfour.avif' },
+            { kategori: 'novel', judul: 'Milea: Suara dari Dilan', penulis: 'Pidi Baiq', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/milea.avif' },
+            { kategori: 'novel', judul: 'Nadira', penulis: 'Leila S. Chudori', status: 'Tersedia', badge: 'Fiksi', gambar: 'buku/nadira.avif' },
+            { kategori: 'novel', judul: 'Hafalan Solat Delisa', penulis: 'Tere Liye', status: 'Tersedia', badge: 'Non-Fiksi', gambar: 'buku/hafalansolat.avif' },
+            { kategori: 'ensiklopedia', judul: 'National Geographic : Aztek Kuno', penulis: 'Tim Cooke', status: 'Tersedia', badge: 'Non-Fiksi', gambar: 'buku/ensklaxtek.avif' },
+            { kategori: 'ensiklopedia', judul: 'National Geographic: Mesir Kuno', penulis: 'Jill Rubalcaba', status: 'Tersedia', badge: 'Non-Fiksi', gambar: 'buku/ensklmesur.avif' },
+            { kategori: 'ensiklopedia', judul: 'Ensiklopedia Junior : Mobil', penulis: 'Fleurus', status: 'Tersedia', badge: 'Non-Fiksi', gambar: 'buku/ensklmobil.avif' },
+            { kategori: 'ensiklopedia', judul: 'National Geographic : Romawi Kuno', penulis: 'Zilah Deckker', status: 'Tersedia', badge: 'Non-Fiksi', gambar: 'buku/ensklyunani.avif' },
+            { kategori: 'sejarah', judul: 'Statistika Penelitian', penulis: 'Mumun Syaban Elly Ratnaningrun', status: 'Tersedia', badge: 'Ilmu Sosial', gambar: 'buku/statistika.jpg' },
+            { kategori: 'sejarah', judul: 'Jokowi Dari Rakyat Dan Tetap Merakyat', penulis: 'West Angga Tijany', status: 'Tersedia', badge: 'Ilmu Sosial', gambar: 'buku/jkwi.jpg' },
+            { kategori: 'sejarah', judul: 'Sejarah Dunia Abad Pertengahan', penulis: 'Susan Wise Bauer', status: 'Tersedia', badge: 'Ilmu Sosial', gambar: 'buku/nalar.png' },
+            { kategori: 'sejarah', judul: 'HTML 5 dan Java Script untuk Pemula', penulis: 'Jubilee Enterprise', status: 'Tersedia', badge: 'Ilmu Sosial', gambar: 'buku/sjrhroma.avif' }
+        ];
+
+        // Inisialisasi data buku default jika localStorage kosong
+        function initBooks() {
+            const existing = localStorage.getItem('libraTechBooks');
+            if (!existing || JSON.parse(existing).length === 0) {
+                localStorage.setItem('libraTechBooks', JSON.stringify(DEFAULT_BOOKS));
+            }
+        }
+
+        // ===== FUNGSI KELOLA BUKU =====
+
+        function getBooks() {
+            return JSON.parse(localStorage.getItem('libraTechBooks')) || [];
+        }
+
+        function saveBooks(books) {
+            localStorage.setItem('libraTechBooks', JSON.stringify(books));
+        }
+
+        function renderBookTable() {
+            const books = getBooks();
+            const filter = document.getElementById('filterKategori').value;
+            const tbody = document.getElementById('bookTableBody');
+            const emptyMsg = document.getElementById('emptyBookMsg');
+
+            let filtered = books;
+            if (filter !== 'semua') {
+                filtered = books.filter(b => b.kategori === filter);
+            }
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                emptyMsg.style.display = '';
+                return;
+            }
+            emptyMsg.style.display = 'none';
+
+            tbody.innerHTML = filtered.map((book, index) => {
+                const realIndex = books.indexOf(book);
+                const statusClass = book.status === 'Tersedia' ? 'text-success' : 'text-danger';
+                return `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td><span class="badge bg-secondary">${book.kategori}</span></td>
+                    <td class="fw-semibold">${book.judul}</td>
+                    <td class="text-secondary">${book.penulis}</td>
+                    <td><span class="fw-bold ${statusClass}">${book.status}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill edit-btn" data-index="${realIndex}">Edit</button>
+                        <button class="btn btn-sm btn-outline-danger rounded-pill hapus-btn" data-index="${realIndex}">Hapus</button>
+                    </td>
+                </tr>
+            `}).join('');
+
+            // Event listeners
+            document.querySelectorAll('.hapus-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const books = getBooks();
+                    const idx = parseInt(this.getAttribute('data-index'));
+                    if (confirm(`Hapus buku "${books[idx].judul}"?`)) {
+                        books.splice(idx, 1);
+                        saveBooks(books);
+                        renderBookTable();
+                    }
+                });
+            });
+
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const books = getBooks();
+                    const idx = parseInt(this.getAttribute('data-index'));
+                    const book = books[idx];
+                    
+                    document.getElementById('editIndex').value = idx;
+                    document.getElementById('kategori').value = book.kategori;
+                    document.getElementById('judul').value = book.judul;
+                    document.getElementById('penulis').value = book.penulis;
+                    document.getElementById('status').value = book.status;
+                    document.getElementById('badge').value = book.badge;
+                    document.getElementById('gambar').value = book.gambar;
+                    
+                    // Tampilkan preview gambar jika ada
+                    if (book.gambar && book.gambar.startsWith('data:')) {
+                        document.getElementById('previewImg').src = book.gambar;
+                        document.getElementById('gambarPreview').style.display = 'block';
+                    } else if (book.gambar) {
+                        document.getElementById('previewImg').src = book.gambar;
+                        document.getElementById('gambarPreview').style.display = 'block';
+                    } else {
+                        document.getElementById('gambarPreview').style.display = 'none';
+                    }
+                    
+                    document.getElementById('formTitle').textContent = '✏️ Edit Buku';
+                    document.getElementById('submitBtn').textContent = 'Simpan Perubahan';
+                    document.getElementById('cancelBtn').style.display = 'inline-block';
+                    
+                    document.getElementById('bookForm').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+
+        // ===== HANDLE FILE UPLOAD (Preview + Base64) =====
+        document.getElementById('gambarFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Cek ukuran file (max 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Ukuran gambar maksimal 2MB!');
+                this.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const dataUrl = event.target.result;
+                document.getElementById('gambar').value = dataUrl;
+                document.getElementById('previewImg').src = dataUrl;
+                document.getElementById('gambarPreview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Hapus gambar yang diupload
+        document.getElementById('hapusGambarBtn').addEventListener('click', function() {
+            document.getElementById('gambarFile').value = '';
+            document.getElementById('gambar').value = '';
+            document.getElementById('gambarPreview').style.display = 'none';
+            document.getElementById('previewImg').src = '';
+        });
+
+        // Filter change
+        document.getElementById('filterKategori').addEventListener('change', renderBookTable);
+
+        // Cancel edit
+        document.getElementById('cancelBtn').addEventListener('click', function() {
+            resetForm();
+        });
+
+        function resetForm() {
+            document.getElementById('editIndex').value = '';
+            document.getElementById('bookForm').reset();
+            document.getElementById('formTitle').textContent = '➕ Tambah Buku Baru';
+            document.getElementById('submitBtn').textContent = 'Tambah Buku';
+            document.getElementById('cancelBtn').style.display = 'none';
+            document.getElementById('formMsg').textContent = '';
+            document.getElementById('formMsg').className = 'mt-3';
+            // Reset preview gambar
+            document.getElementById('gambar').value = '';
+            document.getElementById('gambarPreview').style.display = 'none';
+            document.getElementById('previewImg').src = '';
+        }
+
+        // Submit form
+        document.getElementById('bookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const editIndex = document.getElementById('editIndex').value;
+            const kategori = document.getElementById('kategori').value;
+            const judul = document.getElementById('judul').value.trim();
+            const penulis = document.getElementById('penulis').value.trim();
+            const status = document.getElementById('status').value;
+            const badge = document.getElementById('badge').value;
+            const gambar = document.getElementById('gambar').value.trim() || 'buku/default.avif';
+
+            const msg = document.getElementById('formMsg');
+
+            if (!judul || !penulis) {
+                msg.textContent = 'Judul dan penulis wajib diisi.';
+                msg.className = 'mt-3 text-danger';
+                return;
+            }
+
+            const bookData = { kategori, judul, penulis, status, badge, gambar };
+            const books = getBooks();
+
+            if (editIndex !== '') {
+                // Edit existing
+                books[parseInt(editIndex)] = bookData;
+                msg.textContent = '✅ Buku berhasil diperbarui!';
+                msg.className = 'mt-3 text-success';
+            } else {
+                // Add new
+                books.push(bookData);
+                msg.textContent = '✅ Buku berhasil ditambahkan!';
+                msg.className = 'mt-3 text-success';
+            }
+
+            saveBooks(books);
+            renderBookTable();
+            resetForm();
+
+            // Hilangkan pesan setelah 3 detik
+            setTimeout(() => {
+                msg.textContent = '';
+                msg.className = 'mt-3';
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>

@@ -59,7 +59,56 @@ body {
 }
 
 .carousel-custom .carousel-inner {
+    height: 100%;
     min-height: 100%;
+}
+
+/* Carousel item with full image - fill entire space */
+.carousel-img-item {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.carousel-img-item .carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Set fixed heights for each carousel */
+#carouselKiri .carousel-inner {
+    height: 500px;
+}
+
+/* Right carousels: auto height so images show fully without cropping */
+#carouselKananAtas,
+#carouselKananBawah {
+    height: auto;
+}
+
+#carouselKananAtas .carousel-inner,
+#carouselKananBawah .carousel-inner {
+    height: auto;
+    min-height: auto;
+}
+
+#carouselKananAtas .carousel-img-item,
+#carouselKananBawah .carousel-img-item {
+    height: auto;
+    position: relative;
+}
+
+#carouselKananAtas .carousel-img,
+#carouselKananBawah .carousel-img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 /* Carousel control hover effect */
