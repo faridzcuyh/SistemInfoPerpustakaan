@@ -5,11 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
-    <title>LibraTech - Perpustakaan Digital</title>
+    <title>Tentang Kami - LibraTech</title>
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet" />
+    <style>
+      .team-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: default;
+      }
+      .team-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
+      }
+      .team-img-wrapper {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        border: 4px solid #ffc107;
+        transition: border-color 0.3s ease;
+      }
+      .team-card:hover .team-img-wrapper {
+        border-color: #ff9800;
+      }
+      .team-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
   </head>
 
   <body class="bg-light">
@@ -48,60 +75,60 @@
       </div>
     </nav>
 
-    <!-- Baris 1: Hero -->
-    <section class="bg-white py-5">
+    <!-- Judul -->
+    <section class="bg-white py-4 border-bottom">
       <div class="container">
-        <div class="hero-section d-flex align-items-center justify-content-center text-center position-relative rounded-4 overflow-hidden">
-          <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-          <div class="position-relative z-1 px-3">
-            <h1 class="text-white display-1 fw-bold animate-fade">Selamat Datang</h1>
-          </div>
-        </div>
+        <h2 class="fw-bold text-dark mb-0">👥 Tentang Kami</h2>
+        <p class="text-secondary mt-2 mb-0">Tim pengembang di balik LibraTech</p>
       </div>
     </section>
 
-    <!-- Baris 2: 2 Kolom - Kiri 1 carousel, Kanan 2 carousel -->
-    <section class="bg-white py-5">
+    <!-- Team Section -->
+    <section class="py-5">
       <div class="container">
-        <div class="row g-4">
-          <!-- Kolom Kiri: 1 Carousel -->
-          <div class="col-lg-6">
-            <div id="carouselKiri" class="carousel slide carousel-custom h-100" data-bs-ride="carousel" data-bs-interval="3000">
-              <div class="carousel-inner rounded-4 shadow-lg overflow-hidden position-relative">
-                <div class="carousel-item active carousel-img-item">
-                  <img src="JElajahi 100++ buku.jpg" class="carousel-img" />
-                </div>
-                <div class="carousel-item carousel-img-item">
-                  <img src="baca 100++ sepuasnya.jpg" class="carousel-img" />
-                </div>
+        <div class="row g-4 justify-content-center">
+          <!-- Anggota 1 -->
+          <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 text-center team-card h-100">
+              <div class="team-img-wrapper mb-3">
+                <img src="https://ui-avatars.com/api/?name=Farid+Zaky&background=ffc107&color=1a1a2e&size=150&bold=true" alt="Farid Alim" class="team-img" />
               </div>
+              <h5 class="fw-bold mb-1">Faiz Akmal</h5>
+              <p class="text-secondary small mb-0">Project Manager & Fullstack Developer</p>
             </div>
           </div>
-
-          <!-- Kolom Kanan: 2 Carousel Vertikal -->
-          <div class="col-lg-6 d-flex flex-column gap-4">
-            <!-- Carousel Kanan Atas -->
-            <div id="carouselKananAtas" class="carousel slide carousel-custom" data-bs-ride="carousel" data-bs-interval="3000">
-              <div class="carousel-inner rounded-4 shadow-lg overflow-hidden">
-                <div class="carousel-item active carousel-img-item">
-                  <img src="Pelayanan Premium.jpg" class="carousel-img" />
-                </div>
-                <div class="carousel-item carousel-img-item">
-                  <img src="koleksi.png" class="carousel-img" />
-                </div>
+          <!-- Anggota 2 -->
+          <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 text-center team-card h-100">
+              <div class="team-img-wrapper mb-3">
+                <img src="https://ui-avatars.com/api/?name=Tim+Developer&background=1a1a2e&color=ffc107&size=150&bold=true" alt="Tim Developer" class="team-img" />
               </div>
+              <h5 class="fw-bold mb-1">Farid Alim</h5>
+              <p class="text-secondary small mb-0">Frontend & Backend Developer</p>
             </div>
-
-            <!-- Carousel Kanan Bawah -->
-            <div id="carouselKananBawah" class="carousel slide carousel-custom" data-bs-ride="carousel" data-bs-interval="3000">
-              <div class="carousel-inner rounded-4 shadow-lg overflow-hidden">
-                <div class="carousel-item active carousel-img-item">
-                  <img src="koleksi.png" class="carousel-img" />
-                </div>
-                <div class="carousel-item carousel-img-item">
-                  <img src="Pelayanan Premium.jpg" class="carousel-img" />
-                </div>
+          </div>
+          <!-- Anggota 3 -->
+          <div class="col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 text-center team-card h-100">
+              <div class="team-img-wrapper mb-3">
+                <img src="https://ui-avatars.com/api/?name=Tim+Kreatif&background=16213e&color=ffc107&size=150&bold=true" alt="Tim Kreatif" class="team-img" />
               </div>
+              <h5 class="fw-bold mb-1">Farsya Adelio</h5>
+              <p class="text-secondary small mb-0">UI/UX Designer & Content Writer</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deskripsi -->
+        <div class="row justify-content-center mt-5">
+          <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 text-center">
+              <h4 class="fw-bold mb-3">Tentang LibraTech</h4>
+              <p class="text-secondary">
+                LibraTech adalah platform perpustakaan digital yang dikembangkan oleh siswa SMK Negeri 5 Surakarta 
+                untuk memberikan akses mudah dan modern terhadap berbagai koleksi buku dan literatur pembelajaran. 
+                Kami berkomitmen untuk mendukung program literasi digital di lingkungan sekolah dan masyarakat.
+              </p>
             </div>
           </div>
         </div>
@@ -141,35 +168,5 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="auth.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const session = getCurrentUser();
-        if (session && session.username) {
-          const loginItem = document.getElementById('navLoginItem');
-          const registerItem = document.getElementById('navRegisterItem');
-          if (loginItem) loginItem.remove();
-          if (registerItem) registerItem.remove();
-
-          const ul = document.querySelector('.navbar-nav');
-          if (ul) {
-            const li = document.createElement('li');
-            li.className = 'nav-item';
-            li.innerHTML = '<span class="nav-link text-white fw-semibold px-3 rounded-pill d-flex align-items-center gap-2" style="cursor: default;"><span class="text-warning" style="font-weight: 700;">Hi, ' + session.username + '</span></span>';
-            ul.appendChild(li);
-
-            const li2 = document.createElement('li');
-            li2.className = 'nav-item';
-            li2.innerHTML = '<button id="logoutBtn" class="nav-link btn btn-outline-light text-white fw-semibold px-3 rounded-pill" type="button">Logout</button>';
-            ul.appendChild(li2);
-
-            document.getElementById('logoutBtn').addEventListener('click', () => {
-              logout();
-              window.location.href = 'login.html';
-            });
-          }
-        }
-      });
-    </script>
   </body>
 </html>

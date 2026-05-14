@@ -128,6 +128,51 @@ body {
     transform: scale(1.1);
 }
 
+/* ===== Footer Styles ===== */
+.site-footer {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+    border-top: 4px solid #ffc107;
+}
+
+.site-footer h5 {
+    color: #ffc107;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.site-footer a {
+    color: #adb5bd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+    color: #ffc107;
+}
+
+.site-footer .footer-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.site-footer .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.site-footer .social-icon:hover {
+    background: #ffc107;
+    color: #1a1a2e !important;
+    transform: translateY(-3px);
+}
+
 /* Responsive hero height */
 @media (max-width: 768px) {
     .hero-section {
